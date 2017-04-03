@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  starcraft:
+    image: yantis/wine
+    environment:
+      - DISPLAY
+    volumes:
+      - .volumes/starcraft:/home/docker/wine/starcraft
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+    tty: true
+    user: docker
+    command: /bin/bash -c "sudo initialize-graphics >/dev/null 2>/dev/null; wine /home/docker/wine/starcraft/StarCraft.exe"
