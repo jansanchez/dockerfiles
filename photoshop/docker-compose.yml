@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  photoshop:
+    image: js/photoshop
+    environment:
+      - DISPLAY
+    volumes:
+      - .volumes/software/PhotoshopCS5:/usr/src/PhotoshopCS5
+      - .volumes/shared:/tmp/shared
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+    tty: true
+    user: docker
+    command: /bin/bash -c "sudo initialize-graphics >/dev/null 2>/dev/null; wine /usr/src/PhotoshopCS5/PhotoshopCS5.exe"
